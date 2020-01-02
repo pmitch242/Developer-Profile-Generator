@@ -15,5 +15,9 @@
   "bugs": {
     "url": "https://github.com/pmitch242/Developer-Profile-Generator/issues"
   },
-  "homepage": "https://github.com/pmitch242/Developer-Profile-Generator#readme"
+  "homepage": "https://github.com/pmitch242/Developer-Profile-Generator#readme",
+  "dependencies": {
+    "axios": "^0.19.0",
+    "inquirer": "^7.0.1"
+  }
 }

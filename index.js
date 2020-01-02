@@ -5,24 +5,37 @@ const axios = require("axios");
 
 const writeFileAsync = util.promisify(fs.writeFile);
 
-function promptUser(){
+function promptUser() {
     return inquirer.prompt([
         {
-            type: "list", 
+            type: "list",
             message: "What is your favorite color?",
-            choies: ["red", "blue", "green", "purple", "black", "orange", "yellow"],
+            choices: ["red", "blue", "green", "purple", "black", "orange", "yellow"],
             name: "favColor"
         },
         {
             type: "input",
             message: "What is your github user name?",
-            name: "github"
+            name: "username"
         }
     ]);
 }
 
-function generateHTML(answers){
-    return `
-    
-    `
-}
+// function generateHTML(answers) {
+//     const queryURL = "https://api.github.com/users/" + answers.username;
+
+//     axios.get(queryURL)
+//         .then(function (response) {
+//             console.log(response);
+//         })
+// }
+
+promptUser()
+    .then(function (answers) {
+        const queryURL = "https://api.github.com/users/" + answers.username;
+
+        axios.get(queryURL)
+            .then(function (response) {
+                console.log(response);
+            })
+    })
