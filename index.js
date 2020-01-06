@@ -1,7 +1,6 @@
 const inquirer = require("inquirer");
 const axios = require("axios");
 const htmpPDF = require("html-pdf");
-var options = { format: 'Letter' };
 
 
 const colors = {
@@ -319,7 +318,6 @@ promptUser()
 
                 htmpPDF.create(html).toFile(`./${username}.pdf`, function (err, res) {
                     if (err) return console.log(err);
-                    // console.log(res); 
                 });
             })
 
