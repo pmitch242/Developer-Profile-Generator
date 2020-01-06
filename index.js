@@ -245,13 +245,13 @@ function generateHTML(answers, response) {
             <h1>My name is ${response.data.name}!</h1>
             <h5>Currently @ ${response.data.company}</h5>
             <ul class="links-nav">
-                <a href="https://www.google.com/maps/search/?api=1&query=${response.data.location}" class="nav-link">
+                <a href="https://www.google.com/maps/search/?api=1&query=${response.data.location}" class="nav-link" target="_blank">
                 <h6><i class="fas fa-location-arrow"></i>${response.data.location}</h6>
                 </a>
-                <a href="https://github.com/pmitch242" class="nav-link">
+                <a href="https://github.com/pmitch242" class="nav-link" target="_blank">
                     <h6><i class="fab fa-github"></i>GitHub</h6>
                 </a>
-                <a href="https://pmitch242.github.io" class="nav-link">
+                <a href="https://pmitch242.github.io" class="nav-link" target="_blank">
                     <h6><i class="fas fa-rss"></i>Blog</h6>
                 </a>
             </ul>
@@ -321,12 +321,9 @@ promptUser()
                 htmpPDF.create(html).toFile(`./${username}.pdf`, function (err, res) {
                     if (err) return console.log(err);
                 });
+                console.log(`Successfully wrote to ${username}.pdf`);
             })
 
-    })
-    .then(function () {
-        // Inform user that user that their pdf is ready for them
-        console.log(`Successfully wrote to ${username}.pdf`);
     })
     .catch(function (err) {
         console.log(err);
