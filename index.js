@@ -2,7 +2,7 @@ const inquirer = require("inquirer");
 const axios = require("axios");
 const htmpPDF = require("html-pdf");
 
-
+// Array of color themes
 const colors = {
     green: {
         wrapperBackground: "#E6E1C3",
@@ -30,6 +30,7 @@ const colors = {
     }
 };
 
+// function that askes user for favorite color and github user name
 function promptUser() {
     return inquirer.prompt([
         {
@@ -46,13 +47,10 @@ function promptUser() {
     ]);
 }
 
+// Function to create html
 function generateHTML(answers, response) {
 
-    // const color = answers.favColor;
-    // console.log(color);
-    // console.log(colors.color);
-    console.log(colors[answers.favColor].wrapperBackground)
-
+// Return html
     return `<!DOCTYPE html>
 <html lang="en">
 
@@ -304,18 +302,22 @@ function generateHTML(answers, response) {
 </html>`
 }
 
+// run promptUser function
 promptUser()
     .then(function (answers) {
+        // GitHub api link
         const queryURL = "https://api.github.com/users/" + answers.username;
 
+        // axios call for user's github api
         axios.get(queryURL)
             .then(function (response) {
-                console.log(response);
-
+                // User's username
                 let username = response.data.login;
 
+                // store the generatered html page
                 let html = generateHTML(answers, response);
 
+                // Covert html to a pdf
                 htmpPDF.create(html).toFile(`./${username}.pdf`, function (err, res) {
                     if (err) return console.log(err);
                 });
@@ -323,7 +325,8 @@ promptUser()
 
     })
     .then(function () {
-        console.log("Successfully wrote to index.html");
+        // Inform user that user that their pdf is ready for them
+        console.log(`Successfully wrote to ${username}.pdf`);
     })
     .catch(function (err) {
         console.log(err);
